@@ -1,8 +1,11 @@
 package com.akash.blog.payloads;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.akash.blog.entity.Category;
+import com.akash.blog.entity.Comments;
 import com.akash.blog.entity.User;
 
 import lombok.Getter;
@@ -29,6 +32,9 @@ public class PostDto {
 	
 	
 	private CategoryDto category;
+	
+	
+	private Set<CommentDto> comments = new HashSet<>();
 	
 
 }

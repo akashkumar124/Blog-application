@@ -16,9 +16,9 @@ public interface PostService {
 	
 	PostDto getPostByPostId(Integer postId);
 	
-	List<Post> serchPostBykeyword(String keyword);
+	List<PostDto> serchPostBykeyword(String keyword);
 	
-	PostResponse getAllPost(Integer pagenumber, Integer pageSize);
+	PostResponse getAllPost(Integer pagenumber, Integer pageSize,String sortBy,String sortDir);
 	
 	List<PostDto> getPostByUserId(Integer userId);
 	

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.akash.blog.entity.Category;
@@ -94,16 +95,29 @@ public class PostServiceImppl implements PostService{
 	}
 
 	@Override
-	public List<Post> serchPostBykeyword(String keyword) {
+	public List<PostDto> serchPostBykeyword(String keyword) {
 		// TODO Auto-generated method stub
-		return null;
+//		List<Post> posts=this.postRepo.findBypTitleContaining(keyword);
+		
+		List<Post> posts=this.postRepo.serachByPostTitle("%"+keyword+"%");
+		
+		List<PostDto> allPost=posts.stream().map((post)->this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+		return allPost;
 	}
 
 	@Override
-	public PostResponse getAllPost(Integer pagenumber, Integer pageSize) {
+	public PostResponse getAllPost(Integer pagenumber, Integer pageSize, String sortBy,String sortDir) {
 		// TODO Auto-generated method stub
 		
-		Pageable p=PageRequest.of(pagenumber, pageSize);
+		Sort sort = null;
+		
+		if(sortDir.equalsIgnoreCase("asc")) {
+			sort=Sort.by(sortBy).ascending();
+		}else {
+			sort=Sort.by(sortBy).descending();
+		}
+		
+		Pageable p=PageRequest.of(pagenumber, pageSize, sort);
 		
 		
 		Page<Post> pagePost=this.postRepo.findAll(p);
