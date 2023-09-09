@@ -1,7 +1,5 @@
-# Blog-application
-blog management application
 
-# Blog Application using Spring Framework and MySQL
+## Blog Application using Spring Framework and MySQL
 
 This is a simple blog application built using the Spring Framework and MySQL database. It allows users to create, read, update, and delete blog posts.
 
